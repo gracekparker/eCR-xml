@@ -8,6 +8,33 @@ Used to parse eCR information from xml files
 3. s_read_process_table
    - Uses function above to create a table
 
+## Instructions for first time use
+1. Set up your file structure. Here is an example of how ours is organized:
+Main folder:
+eCR RR Analysis
+Subfolders:
+/R scripts
+/Rhapsody files
+/Output
+
+2. Edit s_read_process_table
+   - Open s_read_process_table in RStudio
+   - Set working directory to your main folder (line 14)
+   - Set dates (line 21-23)
+   - Edit write.xlsx function to point to the output folder (line 90)
+   - Make other necessary edits that may be unique to your file or folder structure
+   - Save changes
+
+3. Edit f_create_table
+   - Open f_create_table in RStudio
+   - If neccessary, make edits to line 32-33 for eICR and RR file names, ours end in CDA_eICR / CDA_RR
+   - If you add any new fields/xpaths, make sure you write them out to the dataframe (beginning on line 450)
+   - Save changes
+  
+4. Run s_read_process_table
+
+## Fields of Interest
+
 **Patient Information:**
 - UID
 - Date of birth
