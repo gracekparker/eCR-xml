@@ -5,8 +5,10 @@ Used to parse eCR information from xml files
 1. f_create_table
    - States the function for creating table from eICR/RR pairs
    - Includes xpaths for relevant fields
-3. s_read_process_table
+2. s_read_process_table
    - Uses function above to create a table
+3. eCR_DQ_Report
+   - Coming soon!
 
 ## Instructions for first time use
 1. Set up your file structure. Here is an example of how ours is organized:
