@@ -1,15 +1,14 @@
 # eCR-xml
 Used to parse eCR information from xml files
 
-Scripts:
+**Scripts:**
 1. f_create_table
    - States the function for creating table from eICR/RR pairs
    - Includes xpaths for relevant fields
 3. s_read_process_table
    - Uses function above to create a table
 
-**Current fields of interest:**
-Patient Information:
+**Patient Information:**
 - UID
 - Date of birth
 - Gender
@@ -24,7 +23,8 @@ Patient Information:
 - Email address
 - Cell telephone number
 - Home telephone number
-Visit Information:
+
+**Visit Information:**
 - Encounter type
 - Reason for visit
 - History of present illness
@@ -37,7 +37,8 @@ Visit Information:
 - Encounter date (low and high)
 - eICR process status
 - eICR process warning
-Facility Information:
+
+**Facility Information:**
 - Health care organization (name & ID)
 - Custodian (name & ID)
 - Facility name
