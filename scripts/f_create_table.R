@@ -13,8 +13,8 @@ f_create_table_entry <- function(dir) {
   filelist2 <- str_extract(dir, "^([^_]*_){3}")
   filelist <- unique(filelist2)
   #filename <- filelist[1]
-  #filename <- "L:/PHIN/Systems Documentation/eICR/eCR data evaluation and QA/eCR RR Analysis/XML to review/1.2.840.114350.1.13.199.2.7.8.688883.186245438_20220815040122_"
-  #filename <- "C:/Users/parkegk/Documents/Projects/eCR RR Analysis/Rhapsody Files/2023/May 2023/archive_2023-05-07/1.2.840.114350.1.13.199.2.7.8.688883.260491328_20230507171607_"
+  filename <- "L:/PHIN/Systems Documentation/eICR/eCR data evaluation and QA/eCR RR Analysis/XML to review/1.2.840.114350.1.13.199.2.7.8.688883.186245438_20220815040122_"
+  filename <- "C:/Users/parkegk/Documents/Projects/eCR RR Analysis/Rhapsody Files/2023/May 2023/archive_2023-05-07/1.2.840.114350.1.13.199.2.7.8.688883.260491328_20230507171607_"
   #filename <- "L:/PHIN/Systems Documentation/eICR/eCR data evaluation and QA/eCR implementation example files from MDH - Copy/history of present illness example xml.xml"
   
   # Initializes the progress bar
@@ -79,19 +79,19 @@ f_create_table_entry <- function(dir) {
   #----
   # grab first name
   fname <- ecr %>%
-    xml_find_first( "//recordTarget/patientRole/patient/name[@use='L']/given[1]") %>%
+    xml_find_first( "//name[@use='L']/given[1]") %>%
     xml_text()
   
   #----
   # grab last name
   lname <- ecr %>%
-    xml_find_first( "//recordTarget/patientRole/patient/name[@use='L']/family[1]") %>%
+    xml_find_first( "//name[@use='L']/family[1]") %>%
     xml_text()
   
   #----
   # grab birth date
   dob <- ecr %>%
-    xml_find_all( "./recordTarget/patientRole/patient/birthTime") %>%
+    xml_find_all( ".//patient/birthTime") %>%
     xml_attr("value")
   
   # parse dob into date 
@@ -115,62 +115,62 @@ f_create_table_entry <- function(dir) {
   #----
   # grab race
   race <- ecr %>%
-    xml_find_all( "./recordTarget/patientRole/patient/raceCode") %>%
+    xml_find_all( ".//patient/raceCode") %>%
     xml_attr("displayName")
   
   #----
   # grab ethnicity
   ethnic <- ecr %>%
-    xml_find_all( "./recordTarget/patientRole/patient/ethnicGroupCode") %>%
+    xml_find_all( ".//patient/ethnicGroupCode") %>%
     xml_attr("displayName")
   
   #----
   #grab gender
   gender <- ecr %>%
-    xml_find_all( "./recordTarget/patientRole/patient/administrativeGenderCode") %>%
+    xml_find_all( ".//patient/administrativeGenderCode") %>%
     xml_attr("displayName")
   
   #----
   # grab state
   state <- ecr %>%
-    xml_find_first( "./recordTarget/patientRole/addr/state") %>%
+    xml_find_first( ".//addr/state") %>%
     xml_text()
   
   #----
   # grab street address
   street <- ecr %>%
-    xml_find_first( "./recordTarget/patientRole/addr/streetAddressLine") %>%
+    xml_find_first( ".//addr/streetAddressLine") %>%
     xml_text()
   
   #----
   #grab city
   city <- ecr %>%
-    xml_find_first( "./recordTarget/patientRole/addr/city") %>%
+    xml_find_first( ".//addr/city") %>%
     xml_text()
   
   #----
   #grab zip
   zip <- ecr %>%
-    xml_find_first( "./recordTarget/patientRole/addr/postalCode") %>%
+    xml_find_first( ".//addr/postalCode") %>%
     xml_text()
   
   #----
   #grab home phone
   home_tel <- ecr %>%
-    xml_find_first( "./recordTarget/patientRole/telecom[@use='HP']") %>%
+    xml_find_first( ".//telecom[@use='HP']") %>%
     xml_attr("value")
   
   
   #----
   #grab cell phone
   cell_tel <- ecr %>%
-    xml_find_first( "./recordTarget/patientRole/telecom[@use='MC']") %>%
+    xml_find_first( ".//telecom[@use='MC']") %>%
     xml_attr("value")
   
   #----
   #grab email
   email <- ecr %>%
-    xml_find_first( "./recordTarget/patientRole/telecom[contains(@value, 'mailto:')]") %>%
+    xml_find_first( ".//telecom[contains(@value, 'mailto:')]") %>%
     xml_attr("value")
 
   
@@ -189,57 +189,57 @@ f_create_table_entry <- function(dir) {
   #----
   #grab HCO
   hco <- ecr %>%
-    xml_find_first( "./author/assignedAuthor/representedOrganization/name") %>%
+    xml_find_first( ".//representedOrganization/name") %>%
     xml_text()
   
   #----
   #grab HCO ID
   hco_id <- ecr %>%
-    xml_find_first( "./author/assignedAuthor/representedOrganization/id") %>%
+    xml_find_first( ".//representedOrganization/id") %>%
     xml_attr("extension")
   
   #----
   #grab custodian
   custodian <- ecr %>%
-    xml_find_first( "./custodian/assignedCustodian/representedCustodianOrganization/name") %>%
+    xml_find_first( ".//representedCustodianOrganization/name") %>%
     xml_text()
   
   #----
   #grab custodian ID
   custodian_id <- ecr %>%
-    xml_find_first( "./custodian/assignedCustodian/representedCustodianOrganization/id") %>%
+    xml_find_first( ".//representedCustodianOrganization/id") %>%
     xml_attr("extension")
   custodian_id
   
   #----
   #grab facility
   facility <- ecr %>%
-    xml_find_first( "./componentOf/encompassingEncounter/location/healthCareFacility/location/name") %>%
+    xml_find_first( ".//encompassingEncounter/location/healthCareFacility/location/name") %>%
     xml_text()
   
   #----
   #grab facility state
   facility_state <- ecr %>%
-    xml_find_first( "./componentOf/encompassingEncounter/location/healthCareFacility/serviceProviderOrganization/addr/state") %>%
+    xml_find_first( ".//encompassingEncounter/location/healthCareFacility/serviceProviderOrganization/addr/state") %>%
     xml_text() 
   
   #----
   #grab assigned author address
   assigned_author_address <- ecr %>%
-    xml_find_first("./author/assignedAuthor/addr/streetAddressLine") %>%
+    xml_find_first(".//assignedAuthor/addr/streetAddressLine") %>%
     xml_text()
   
   
   #----
   #grab Encounter type
   enc_type <- ecr %>%
-    xml_find_first( "./componentOf/encompassingEncounter/code") %>%
+    xml_find_first( ".//encompassingEncounter/code") %>%
     xml_attr("displayName")
   
   #grab encompassing encounter datetime
   #encompassing encounter - low date
   enc_ldt <- ecr %>%
-    xml_find_first("./componentOf/encompassingEncounter/effectiveTime/low") %>%
+    xml_find_first(".//encompassingEncounter/effectiveTime/low") %>%
     xml_attr("value")
   
   enc_ly <- substr(enc_ldt, start = 1, stop = 4)
@@ -250,7 +250,7 @@ f_create_table_entry <- function(dir) {
   
   #encompassing encounter - high date
   enc_hdt <- ecr %>%
-    xml_find_first("./componentOf/encompassingEncounter/effectiveTime/high") %>%
+    xml_find_first(".//encompassingEncounter/effectiveTime/high") %>%
     xml_attr("value")
   
   enc_hy <- substr(enc_hdt, start = 1, stop = 4)
@@ -261,19 +261,14 @@ f_create_table_entry <- function(dir) {
   
   #reason for visit
   reason_for_visit <- ecr %>%
-    xml_find_all( "./component/structuredBody/component[6]/section/text/list/item/table/tbody/tr/td[contains(@ID, 'reasonrfv')]") %>%
+    xml_find_all( ".//tr/td[contains(@ID, 'reasonrfv')]") %>%
     xml_text()
   reason_for_visit <- paste(reason_for_visit, collapse = "; ")
-  
+
   #history of present illness
   hx_present_illness <- ecr %>%
-    xml_find_first( "./component/structuredBody/component/section/text/list/item/content") %>%
-    xml_attr("ID") # ID does not pull content, just pulls Note2, nof2, etc.
-  
-  #patient care coordination note
-  pcc_note <- ecr %>%
-    xml_find_first( "./component/structuredBody/component[5]/section/text/table/tbody/tr/td/content[contains(@ID, 'PCCnote')]") %>%
-    xml_text()
+    xml_find_first( ".//section[code[contains(@displayName, 'HISTORY OF PRESENT ILLNESS')]]/text/list/item/content") %>%
+    xml_attr("ID") # ID does not pull content, just pulls Note2, nof2, etc. to determine whether the field was completed
   
   #history of present illness
   hx_present_illness_txt <- ecr %>%
@@ -281,26 +276,33 @@ f_create_table_entry <- function(dir) {
     xml_text() # ID does not pull content, just pulls Note2, nof2, etc.
   hx_present_illness_txt <- paste(hx_present_illness_txt, collapse = "; ")
   
+  #patient care coordination note
+  pcc_note <- ecr %>%
+    xml_find_first( ".//tr/td/content[contains(@ID, 'PCCnote')]") %>%
+    xml_text()
   
-  #medications administered
+  
+  #medication - not on file tag
   medication_noftag <- ecr %>%
     xml_find_first( "./component/structuredBody/component[3]/section/text/content") %>%
     xml_attr("ID") # This should only come up if not on file
   
+  #medication list
   medication <- ecr %>%
-    xml_find_all("./component/structuredBody/component[3]/section/text/table/tbody/tr/td/paragraph") %>%
-    xml_text()
-  medication <- paste(medication, collapse = "; ")
+    xml_find_all(".//tr/td/paragraph[contains(@ID, 'med')]") %>%
+    xml_text() 
+  medication <- paste(medication, collapse = "; ") 
   
   #plan of treatment
   plan_of_tx <- ecr %>%
-    xml_find_all("./component/structuredBody/component[4]/section/entry/observation/code") %>%
+    xml_find_all(".//section[code[contains(@displayName, 'Plan of care')]]/entry/observation/code") %>%
     xml_attr("displayName")
   plan_of_tx <- paste(plan_of_tx, collapse = "; ")
+  plan_of_tx
   
   #problem list
   problem_list <- ecr %>%
-    xml_find_all("./component/structuredBody/component[5]/section/text/table/tbody/tr[contains(@ID, 'problem')]/td[contains(@ID, 'name')]") %>%
+    xml_find_all(".//tr[contains(@ID, 'problem')]/td[contains(@ID, 'name')]") %>%
     xml_text()
   problem_list <- paste(problem_list, collapse = "; ")
   
@@ -348,7 +350,7 @@ f_create_table_entry <- function(dir) {
   
   # smoking variable
   smoker <- ecr %>%
-    xml_find_first( "./component/structuredBody/component/section/entry/observation[templateId[contains(@root, '2.16.840.1.113883.10.20.22.4.78')]]/value") %>%
+    xml_find_first( ".//observation[templateId[contains(@root, '2.16.840.1.113883.10.20.22.4.78')]]/value") %>%
     xml_attr("displayName")
 
   
