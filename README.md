@@ -2,11 +2,14 @@
 Used to parse eCR information from xml files
 
 **Scripts:**
-1. f_create_table
+1. f_create_table_entry
    - States the function for creating table from eICR/RR pairs
    - Includes xpaths for relevant fields
 2. s_read_process_table
    - Uses function above to create a table
+3. s_node_finding_example 
+   - Shows an example of finding node by location vs value
+   - May help in testing new xpaths
 3. eCR_DQ_Report
    - Coming soon!
 
