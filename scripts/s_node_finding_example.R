@@ -15,7 +15,7 @@ library(openxlsx)
 
 # Set up
   # File name
-filename <- "C:/Users/parkegk/Documents/Projects/eCR RR Analysis/Rhapsody Files/Examples/test_case_"
+filename <- ""
   # Read eICR / RR xml files
 ecr_file <- read_xml(paste0(filename,"CDA_eICR.xml"))
   # Strip namespaces to fine the nodes
