@@ -11,7 +11,7 @@ rm(list=ls()) #clear history
 
 #### Set working directory ####
 # I recommend creating a project in RStudio, and then that will be the automatic working directory
-setwd("C:/Users/parkegk/Documents/Projects/eCR RR Analysis")
+setwd("")
 getwd()
 
 #### Set date range & get folder names ####
