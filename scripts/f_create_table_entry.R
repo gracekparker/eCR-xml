@@ -13,9 +13,7 @@ f_create_table_entry <- function(dir) {
   filelist2 <- str_extract(dir, "^([^_]*_){3}")
   filelist <- unique(filelist2)
   #filename <- filelist[1]
-  # filename <- "L:/PHIN/Systems Documentation/eICR/eCR data evaluation and QA/eCR RR Analysis/XML to review/1.2.840.114350.1.13.199.2.7.8.688883.186245438_20220815040122_"
-  # filename <- "C:/Users/parkegk/Documents/Projects/eCR RR Analysis/Rhapsody Files/2023/May 2023/archive_2023-05-07/1.2.840.114350.1.13.199.2.7.8.688883.260491328_20230507171607_"
-  #filename <- "L:/PHIN/Systems Documentation/eICR/eCR data evaluation and QA/eCR implementation example files from MDH - Copy/history of present illness example xml.xml"
+  #filename <- "type example filepath here for testing"
   
   # Initializes the progress bar
   pb <- txtProgressBar(min = 0,                     # Minimum value of the progress bar
